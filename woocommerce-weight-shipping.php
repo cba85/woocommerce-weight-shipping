@@ -7,11 +7,16 @@
  * Version:     1.0.0
  * Author:      Clément Barbaza
  * Author URI:  https://clementbarbaza.com/
- * License:     GPL2
- * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: wcmr
+ * License:     GPL3
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ * Text Domain: woocommerce-weight-shipping
  * Domain Path: /resources/lang
  */
 
-// Manual autoload
-require __DIR__ . '/bootstrap/autoload.php';
+use WoocommerceWeightShipping\Controllers\Admin\AdminController;
+
+$plugin = require __DIR__ . '/bootstrap/plugin.php';
+
+if (is_admin()) {
+    new AdminController;
+}

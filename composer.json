@@ -1,0 +1,21 @@
+{
+  "name": "cba85/woocommerce-weight-shipping",
+  "description": "WooCommerce weight shipping plugin",
+  "type": "wordpress-plugin",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "cba85",
+      "email": "hi@clementbarbaza.com"
+    }
+  ],
+  "keywords": [
+    "wordpress",
+    "woocommerce",
+    "weight",
+    "shipping"
+  ],
+  "require": {
+    "php": ">=7.1"
+  }
+}

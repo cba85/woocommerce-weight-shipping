@@ -6,7 +6,6 @@ use WoocommerceWeightShipping\Services\ShippingMethodService;
 use Icarus\Support\Facades\View;
 use Icarus\Support\Facades\Notice;
 use Icarus\Support\Facades\Menu;
-use Icarus\Support\Facades\Admin;
 
 class AdminController
 {
@@ -23,7 +22,6 @@ class AdminController
     public function __construct()
     {
         $this->createMenu();
-        $this->registerActions();
     }
 
     /**
@@ -87,19 +85,6 @@ class AdminController
         Menu::addPage('Weight Shipping', 'Weight Shipping', 'manage_options', 'woocommerce-weight-shipping', function () {
             return (new \WoocommerceWeightShipping\Controllers\Admin\AdminController)->index();
         }, 'dashicons-store', 58.1);
-
         Menu::create();
-    }
-
-    /**
-     * Register form actions
-     *
-     * @return void
-     */
-    protected function registerActions()
-    {
-        Admin::action('process_test', function () {
-            return $this->save();
-        });
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace WoocommerceWeightShipping\Controllers\Admin;
+namespace WoocommerceWeightShipping\Controllers;
 
 use WoocommerceWeightShipping\Services\ShippingMethodService;
 use Icarus\Support\Facades\View;
@@ -82,7 +82,7 @@ class AdminController
     protected function createMenu(): void
     {
         Menu::addPage('Weight Shipping', 'Weight Shipping', 'manage_options', 'woocommerce-weight-shipping', function () {
-            return (new \WoocommerceWeightShipping\Controllers\Admin\AdminController)->index();
+            return (new \WoocommerceWeightShipping\Controllers\AdminController)->index();
         }, 'dashicons-store', 58.1);
         Menu::create();
     }

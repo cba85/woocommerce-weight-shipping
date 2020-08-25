@@ -12,7 +12,6 @@ class ShippingMethodServiceTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetShippingMethodInformation()
     {
-        $shippingMethodService = new ShippingMethodService;
         $shippingMethod = new \stdClass;
         $shippingMethod->zone_id = 1;
         $shippingMethod->instance_id = 3;
@@ -25,7 +24,7 @@ class ShippingMethodServiceTest extends \PHPUnit\Framework\TestCase
         $shippingMethod->location_code = 'FR';
         $shippingMethod->location_type = 'country';
 
-        $shippingMethodInformation = $shippingMethodService->getShippingMethodInformation($shippingMethod);
+        $shippingMethodInformation = (new ShippingMethodService)->getShippingMethodInformation($shippingMethod);
 
         $this->assertInstanceOf(ShippingMethod::class, $shippingMethodInformation);
         $this->assertEquals($shippingMethod->instance_id, $shippingMethodInformation->instanceId);
@@ -44,9 +43,7 @@ class ShippingMethodServiceTest extends \PHPUnit\Framework\TestCase
     public function testGetShippingMethodInformationUsingIncorrectShippingMethod()
     {
         $this->expectException(TypeError::class);
-        $shippingMethodService = new ShippingMethodService;
-        $shippingMethod = null;
-        $shippingMethodService->getShippingMethodInformation($shippingMethod);
+        (new ShippingMethodService)->getShippingMethodInformation(null);
     }
 
     /**
@@ -56,8 +53,6 @@ class ShippingMethodServiceTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetShippingMethodsInformation()
     {
-        $shippingMethodService = new ShippingMethodService;
-
         $shippingMethod1 = new \stdClass;
         $shippingMethod1->zone_id = 1;
         $shippingMethod1->instance_id = 3;
@@ -84,7 +79,7 @@ class ShippingMethodServiceTest extends \PHPUnit\Framework\TestCase
 
         $methods = [$shippingMethod1, $shippingMethod2];
 
-        $shippingMethodsInformation = $shippingMethodService->getShippingMethodsInformation($methods);
+        $shippingMethodsInformation = (new ShippingMethodService)->getShippingMethodsInformation($methods);
 
         $this->assertIsArray($shippingMethodsInformation);
         $this->assertCount(2, $shippingMethodsInformation);
@@ -112,7 +107,6 @@ class ShippingMethodServiceTest extends \PHPUnit\Framework\TestCase
     public function testGetShippingMethodsInformationUsingIncorrectMethods()
     {
         $this->expectException(TypeError::class);
-        $shippingMethodService = new ShippingMethodService;
 
         $shippingMethod = new \stdClass;
         $shippingMethod->zone_id = 1;
@@ -126,6 +120,6 @@ class ShippingMethodServiceTest extends \PHPUnit\Framework\TestCase
         $shippingMethod->location_code = 'FR';
         $shippingMethod->location_type = 'country';
 
-        $shippingMethodService->getShippingMethodsInformation($shippingMethod);
+        (new ShippingMethodService)->getShippingMethodsInformation($shippingMethod);
     }
 }

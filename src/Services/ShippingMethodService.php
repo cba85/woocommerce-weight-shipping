@@ -16,6 +16,7 @@ class ShippingMethodService
     {
         $shippingMethod = new ShippingMethod();
         $shippingMethod->instanceId = $method->instance_id;
+        $shippingMethod->methodId = $method->method_id;
         $shippingMethod->zoneId = $method->zone_id;
         $shippingMethod->enabled = $method->is_enabled;
         $shippingMethod->zone['name'] = $method->zone_name;
@@ -44,7 +45,7 @@ class ShippingMethodService
     }
 
     /**
-     * Get all Mondail Relay shipping methods
+     * Get all shipping methods
      *
      * @return array
      */
@@ -53,7 +54,8 @@ class ShippingMethodService
         global $wpdb;
         $query = "SELECT * FROM {$wpdb->prefix}woocommerce_shipping_zone_methods as methods
             LEFT JOIN {$wpdb->prefix}woocommerce_shipping_zones as zones ON methods.zone_id = zones.zone_id
-            LEFT JOIN {$wpdb->prefix}woocommerce_shipping_zone_locations as locations ON methods.zone_id = locations.zone_id";
+            LEFT JOIN {$wpdb->prefix}woocommerce_shipping_zone_locations as locations ON methods.zone_id = locations.zone_id
+            WHERE methods.is_enabled = 1";
         $results = $wpdb->get_results($query);
         return $this->getShippingMethodsInformation($results);
     }
@@ -70,7 +72,7 @@ class ShippingMethodService
         $query = "SELECT * FROM {$wpdb->prefix}woocommerce_shipping_zone_methods as methods
             LEFT JOIN {$wpdb->prefix}woocommerce_shipping_zones as zones ON methods.zone_id = zones.zone_id
             LEFT JOIN {$wpdb->prefix}woocommerce_shipping_zone_locations as locations ON methods.zone_id = locations.zone_id
-            WHERE methods.instance_id = {$instanceId}";
+            WHERE methods.instance_id = {$instanceId} AND methods.is_enabled = 1";
         $result = $wpdb->get_row($query);
         return $this->getShippingMethodInformation($result);
     }

@@ -13,10 +13,12 @@
  * Domain Path: /resources/lang
  */
 
-use WoocommerceWeightShipping\Controllers\Admin\AdminController;
+use WoocommerceWeightShipping\Controllers\AdminController;
+use WoocommerceWeightShipping\Controllers\CheckoutController;
 
 $plugin = require __DIR__ . '/bootstrap/plugin.php';
 
 if (is_admin()) {
     new AdminController;
 }
+new CheckoutController;

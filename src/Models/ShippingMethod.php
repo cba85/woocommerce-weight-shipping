@@ -12,6 +12,13 @@ class ShippingMethod
     public $instanceId;
 
     /**
+     * Method id
+     *
+     * @var integer
+     */
+    public $methodId;
+
+    /**
      * Zone id
      *
      * @var integer
@@ -60,7 +67,7 @@ class ShippingMethod
      */
     public function getSettings()
     {
-        return get_option("woocommerce_mondialrelay_shipping_method_{$this->instanceId}_settings");
+        return get_option("woocommerce_{$this->methodId}_{$this->instanceId}_settings");
     }
 
     /**
@@ -70,7 +77,7 @@ class ShippingMethod
      */
     public function getWeightVariations()
     {
-        if (!$weightVariations = get_option("woocommerce_mondialrelay_shipping_method_{$this->instanceId}_weight_variations")) {
+        if (!$weightVariations = get_option("woocommerce_{$this->methodId}_{$this->instanceId}_weight_variations")) {
             return null;
         }
 
@@ -97,7 +104,7 @@ class ShippingMethod
             'weight' => $convertedWeight,
             'cost' => $cost,
         ];
-        update_option("woocommerce_mondialrelay_shipping_method_{$this->instanceId}_weight_variations", serialize($this->weightVariations));
+        update_option("woocommerce_{$this->methodId}_{$this->instanceId}_weight_variations", serialize($this->weightVariations));
     }
 
     /**
@@ -114,7 +121,7 @@ class ShippingMethod
             }
         }
 
-        update_option("woocommerce_mondialrelay_shipping_method_{$this->instanceId}_weight_variations", serialize($this->weightVariations));
+        update_option("woocommerce_{$this->methodId}_{$this->instanceId}_weight_variations", serialize($this->weightVariations));
     }
 
     /**

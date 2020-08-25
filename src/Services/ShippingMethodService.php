@@ -12,7 +12,7 @@ class ShippingMethodService
      * @param $method
      * @return ShippingMethod
      */
-    protected function getShippingMethodInformation(\StdClass $method): ShippingMethod
+    public function getShippingMethodInformation(\StdClass $method): ShippingMethod
     {
         $shippingMethod = new ShippingMethod();
         $shippingMethod->instanceId = $method->instance_id;
@@ -34,7 +34,7 @@ class ShippingMethodService
      * @param array $methods
      * @return array
      */
-    protected function getShippingMethodsInformation(array $methods): array
+    public function getShippingMethodsInformation(array $methods): array
     {
         $shippingMethodsCollection = [];
         foreach ($methods as $method) {

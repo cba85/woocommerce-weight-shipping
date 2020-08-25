@@ -92,7 +92,7 @@ class ShippingMethod
      */
     public function addWeightVariation(float $weight, float $cost): void
     {
-        $convertedWeight = $this->convertCurrentWeightUnitToGrams($weight);
+        $convertedWeight = $this->convertCurrentWeightUnitToGrams($weight, get_option('woocommerce_weight_unit'));
         $this->weightVariations[] = [
             'weight' => $convertedWeight,
             'cost' => $cost,
@@ -121,11 +121,12 @@ class ShippingMethod
      * Convert order weight in Woocommerce current weight unit to grams
      *
      * @param float $weight
+     * @param string $woocommerceWeightUnit
      * @return float
      */
-    public function convertCurrentWeightUnitToGrams(float $weight): float
+    public function convertCurrentWeightUnitToGrams(float $weight, string $woocommerceWeightUnit): float
     {
-        switch (get_option('woocommerce_weight_unit')) {
+        switch ($woocommerceWeightUnit) {
             case 'g':
                 return $weight;
                 break;

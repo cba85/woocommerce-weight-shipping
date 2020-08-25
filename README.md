@@ -8,7 +8,7 @@ Compatible with all the Woocommerce weight units (g, kg, oz, lbs).
 
 ## Install
 
-This plugin is made using [WP Icarus framework](), a Wordpress plugin wihch adds expressive and elegant syntax for Wordpress functions, loaded using PSR-4 composer autoload.
+This plugin is made using [WP Icarus framework](https://github.com/cba85/wp-icarus-framework), a Wordpress plugin wihch adds expressive and elegant syntax for Wordpress functions, loaded using PSR-4 composer autoload.
 
 ## Tests
 

@@ -12,7 +12,7 @@ class ShippingMethodService
      * @param $method
      * @return ShippingMethod
      */
-    protected function getShippingMethodInformation($method)
+    protected function getShippingMethodInformation(\StdClass $method): ShippingMethod
     {
         $shippingMethod = new ShippingMethod();
         $shippingMethod->instanceId = $method->instance_id;
@@ -34,7 +34,7 @@ class ShippingMethodService
      * @param array $methods
      * @return array
      */
-    protected function getShippingMethodsInformation(array $methods)
+    protected function getShippingMethodsInformation(array $methods): array
     {
         $shippingMethodsCollection = [];
         foreach ($methods as $method) {
@@ -48,14 +48,13 @@ class ShippingMethodService
      *
      * @return array
      */
-    public function all()
+    public function all(): array
     {
         global $wpdb;
         $query = "SELECT * FROM {$wpdb->prefix}woocommerce_shipping_zone_methods as methods
             LEFT JOIN {$wpdb->prefix}woocommerce_shipping_zones as zones ON methods.zone_id = zones.zone_id
             LEFT JOIN {$wpdb->prefix}woocommerce_shipping_zone_locations as locations ON methods.zone_id = locations.zone_id";
         $results = $wpdb->get_results($query);
-        //TODO: Check if exists
         return $this->getShippingMethodsInformation($results);
     }
 
@@ -65,7 +64,7 @@ class ShippingMethodService
      * @param int $instanceId
      * @return ShippingMethod
      */
-    public function get($instanceId)
+    public function get(int $instanceId)
     {
         global $wpdb;
         $query = "SELECT * FROM {$wpdb->prefix}woocommerce_shipping_zone_methods as methods
@@ -73,7 +72,6 @@ class ShippingMethodService
             LEFT JOIN {$wpdb->prefix}woocommerce_shipping_zone_locations as locations ON methods.zone_id = locations.zone_id
             WHERE methods.instance_id = {$instanceId}";
         $result = $wpdb->get_row($query);
-        //TODO: Check if exists
         return $this->getShippingMethodInformation($result);
     }
 }

@@ -90,7 +90,7 @@ class ShippingMethod
      * @param float $cost
      * @return void
      */
-    public function addWeightVariation(float $weight, float $cost)
+    public function addWeightVariation(float $weight, float $cost): void
     {
         $convertedWeight = $this->convertCurrentWeightUnitToGrams($weight);
         $this->weightVariations[] = [
@@ -106,7 +106,7 @@ class ShippingMethod
      * @param float $weight
      * @return void
      */
-    function deleteWeightVariation(float $weight)
+    function deleteWeightVariation(float $weight): void
     {
         foreach ($this->weightVariations as $key => $weightVariation) {
             if ($weightVariation['weight'] == $weight) {
@@ -123,7 +123,7 @@ class ShippingMethod
      * @param float $weight
      * @return float
      */
-    public function convertCurrentWeightUnitToGrams(float $weight)
+    public function convertCurrentWeightUnitToGrams(float $weight): float
     {
         switch (get_option('woocommerce_weight_unit')) {
             case 'g':

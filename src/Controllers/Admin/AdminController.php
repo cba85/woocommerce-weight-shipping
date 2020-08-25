@@ -43,11 +43,16 @@ class AdminController
      */
     public function delete()
     {
-        // TODO: Check shipping_method exists
+        if (empty($_POST['shipping_method']) or empty($_POST['weight'])) {
+            Notice::error('error', 'Missing parameters.');
+            return $this->redirect($this->page);
+        }
+
         $shippingMethods = (new ShippingMethodService)->get($_POST['shipping_method']);
-        //TODO: Check weight exists
         $shippingMethods->deleteWeightVariation($_POST['weight']);
+
         Notice::create('success', 'Your weight variation shipping has been deleted.');
+        return $this->redirect($this->page);
     }
 
     /**
@@ -57,8 +62,14 @@ class AdminController
      */
     public function add()
     {
+        if (empty($_POST['shipping_method']) or empty($_POST['weight']) or empty($_POST['cost'])) {
+            Notice::error('error', 'Missing parameters.');
+            return $this->redirect($this->page);
+        }
+
         $shippingMethods = (new ShippingMethodService)->get($_POST['shipping_method']);
         $shippingMethods->addWeightVariation($_POST['weight'], $_POST['cost']);
+
         Notice::create('success', 'Your weight variation shipping has been saved.');
         return $this->redirect($this->page);
     }
@@ -68,7 +79,7 @@ class AdminController
      *
      * @return void
      */
-    protected function createMenu()
+    protected function createMenu(): void
     {
         Menu::addPage('Weight Shipping', 'Weight Shipping', 'manage_options', 'woocommerce-weight-shipping', function () {
             return (new \WoocommerceWeightShipping\Controllers\Admin\AdminController)->index();

@@ -22,7 +22,7 @@
             <tr>
                 <td><?= $shippingMethod->instanceId ?></td>
                 <td><?= $shippingMethod->methodId ?></td>
-                <td><?= $shippingMethod->zone['name'] ?></td>
+                <td><?= $shippingMethod->zone['name'] ? $shippingMethod->zone['name'] : __("Other", 'woocommerce-weight-shipping') ?></td>
                 <td><?php if ($shippingMethod->enabled) : ?> Yes <?php else : ?> No <?php endif ?></td>
                 <td><?php if ($shippingMethod->settings['tax_status']) : ?> Yes <?php else : ?> No <?php endif ?></td>
                 <td>-</td>
@@ -65,7 +65,7 @@
                     <select name="shipping_method" id="shipping_method" required>
                         <option value="" disabled selected><?= __("Select a shipping method", 'woocommerce-weight-shipping') ?></option>
                         <?php foreach ($shippingMethods as $shippingMethod) : ?>
-                            <option value="<?= $shippingMethod->instanceId ?>"><?= $shippingMethod->instanceId ?> [<?= $shippingMethod->zone['name'] ?>] <?= $shippingMethod->methodId ?></option>
+                            <option value="<?= $shippingMethod->instanceId ?>"><?= $shippingMethod->instanceId ?> [<?= $shippingMethod->zone['name'] ? $shippingMethod->zone['name'] : __("Other", 'woocommerce-weight-shipping') ?>] <?= $shippingMethod->methodId ?></option>
                         <?php endforeach ?>
                     </select>
                 </td>

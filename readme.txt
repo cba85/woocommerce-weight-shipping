@@ -5,7 +5,7 @@ WooCommerce Weight shipping plugin.
 
 Contributors: cba85
 
-Tags: woocommerce mondialrelay
+Tags: woocommerce weight shipping
 
 Description
 --------------

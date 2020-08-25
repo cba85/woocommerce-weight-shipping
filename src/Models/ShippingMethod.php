@@ -2,9 +2,6 @@
 
 namespace WoocommerceWeightShipping\Models;
 
-/**
- * Shipping method model
- */
 class ShippingMethod
 {
     /**
@@ -95,8 +92,9 @@ class ShippingMethod
      */
     public function addWeightVariation(float $weight, float $cost)
     {
+        $convertedWeight = $this->convertCurrentWeightUnitToGrams($weight);
         $this->weightVariations[] = [
-            'weight' => $weight * 1000, // Convert from kg to g
+            'weight' => $convertedWeight,
             'cost' => $cost,
         ];
         update_option("woocommerce_mondialrelay_shipping_method_{$this->instanceId}_weight_variations", serialize($this->weightVariations));
@@ -117,5 +115,33 @@ class ShippingMethod
         }
 
         update_option("woocommerce_mondialrelay_shipping_method_{$this->instanceId}_weight_variations", serialize($this->weightVariations));
+    }
+
+    /**
+     * Convert order weight in Woocommerce current weight unit to grams
+     *
+     * @param float $weight
+     * @return float
+     */
+    public function convertCurrentWeightUnitToGrams(float $weight)
+    {
+        switch (get_option('woocommerce_weight_unit')) {
+            case 'g':
+                return $weight;
+                break;
+            case 'kg':
+                return $weight * 1000;
+                break;
+            case 'lbs':
+                return $weight * 453.59237;
+                break;
+            case 'oz':
+                return $weight * 28.3495;
+                break;
+
+            default:
+                return $weight;
+                break;
+        }
     }
 }

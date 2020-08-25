@@ -14,7 +14,7 @@ class AdminController
      *
      * @var string
      */
-    protected $page = "admin.php?page=woocommerce-weight-shipping";
+    protected $page = "woocommerce-weight-shipping";
 
     /**
      * Create admin menu and register actions
@@ -22,6 +22,7 @@ class AdminController
     public function __construct()
     {
         $this->createMenu();
+        $this->dispatch();
     }
 
     /**
@@ -38,11 +39,13 @@ class AdminController
     /**
      * Delete a shipping weight variation
      *
-     * @param $shippingMethods
      * @return void
      */
-    public function delete($shippingMethods)
+    public function delete()
     {
+        // TODO: Check shipping_method exists
+        $shippingMethods = (new ShippingMethodService)->get($_POST['shipping_method']);
+        //TODO: Check weight exists
         $shippingMethods->deleteWeightVariation($_POST['weight']);
         Notice::create('success', 'Your weight variation shipping has been deleted.');
     }
@@ -50,29 +53,14 @@ class AdminController
     /**
      * Add a shipping weight variation
      *
-     * @param $shippingMethods
      * @return void
      */
-    public function add($shippingMethods)
-    {
-        $shippingMethods->addWeightVariation($_POST['weight'], $_POST['cost']);
-        Notice::create('success', 'Your weight variation shipping has been saved.');
-    }
-
-    /**
-     * Save shipping settings
-     *
-     * @return void
-     */
-    public function save()
+    public function add()
     {
         $shippingMethods = (new ShippingMethodService)->get($_POST['shipping_method']);
-        if (isset($_POST['_method']) and $_POST['_method'] == 'delete') {
-            $this->delete($shippingMethods);
-        } else {
-            $this->add($shippingMethods);
-        }
-        return $this->redirect($this->page, $this->tab);
+        $shippingMethods->addWeightVariation($_POST['weight'], $_POST['cost']);
+        Notice::create('success', 'Your weight variation shipping has been saved.');
+        return $this->redirect($this->page);
     }
 
     /**
@@ -86,5 +74,40 @@ class AdminController
             return (new \WoocommerceWeightShipping\Controllers\Admin\AdminController)->index();
         }, 'dashicons-store', 58.1);
         Menu::create();
+    }
+
+    /**
+     * Dispatch
+     *
+     * @return void
+     */
+    public function dispatch()
+    {
+        if (isset($_GET['page']) and $_GET['page'] == $this->page) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                if (isset($_POST['_method']) and $_POST['_method'] == 'delete') {
+                    return $this->delete();
+                } else {
+                    return $this->add();
+                }
+            }
+        }
+    }
+
+    /**
+     * Redirect to a specific page or a specific tab
+     *
+     * @param string $page
+     * @param string $tab
+     * @return void
+     */
+    public function redirect($page, $tab = null)
+    {
+        $location = "?page={$page}";
+        if ($tab) {
+            $location .= "&tab={$tab}";
+        }
+        header("Location: $location");
+        die();
     }
 }

@@ -4,9 +4,6 @@ namespace WoocommerceWeightShipping\Services;
 
 use WoocommerceWeightShipping\Models\ShippingMethod;
 
-/**
- * Mondial Relay shipping method service
- */
 class ShippingMethodService
 {
     /**
@@ -58,6 +55,7 @@ class ShippingMethodService
             LEFT JOIN {$wpdb->prefix}woocommerce_shipping_zones as zones ON methods.zone_id = zones.zone_id
             LEFT JOIN {$wpdb->prefix}woocommerce_shipping_zone_locations as locations ON methods.zone_id = locations.zone_id";
         $results = $wpdb->get_results($query);
+        //TODO: Check if exists
         return $this->getShippingMethodsInformation($results);
     }
 
@@ -75,6 +73,7 @@ class ShippingMethodService
             LEFT JOIN {$wpdb->prefix}woocommerce_shipping_zone_locations as locations ON methods.zone_id = locations.zone_id
             WHERE methods.instance_id = {$instanceId}";
         $result = $wpdb->get_row($query);
+        //TODO: Check if exists
         return $this->getShippingMethodInformation($result);
     }
 }

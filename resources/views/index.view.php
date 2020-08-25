@@ -12,7 +12,7 @@
             <th scope="col"><?= __("Zone", 'woocommerce-weight-shipping'); ?></th>
             <th scope="col"><?= __("Enabled", 'woocommerce-weight-shipping'); ?></th>
             <th scope="col"><?= __("Tax", 'woocommerce-weight-shipping'); ?></th>
-            <th scope="col"><?= __("Maximum weight", 'woocommerce-weight-shipping'); ?></th>
+            <th scope="col"><?= __("Max. weight", 'woocommerce-weight-shipping'); ?></th>
             <th scope="col"><?= __("Cost", 'woocommerce-weight-shipping'); ?></th>
             <th scope="col"><?= __("Actions", 'woocommerce-weight-shipping'); ?></th>
         </tr>
@@ -26,15 +26,15 @@
                 <td><?php if ($shippingMethod->enabled) : ?> Yes <?php else : ?> No <?php endif ?></td>
                 <td><?php if ($shippingMethod->settings['tax_status']) : ?> Yes <?php else : ?> No <?php endif ?></td>
                 <td>-</td>
-                <td><?= number_format($shippingMethod->settings['cost'], 2, ',', ' ') ?> €</td>
+                <td><?= $shippingMethod->settings['cost'] ?> <?= get_woocommerce_currency_symbol() ?></td>
                 <td></td>
             </tr>
             <?php if ($shippingMethod->weightVariations) : ?>
                 <?php foreach ($shippingMethod->weightVariations as $weightVariation) : ?>
                     <tr>
                         <td colspan="5"></td>
-                        <td><?= number_format($weightVariation['weight'] / 1000, 2, ',', ' ') ?> kg</td>
-                        <td><?= number_format($weightVariation['cost'], 2, ',', ' ') ?> €</td>
+                        <td><?= $weightVariation['weight'] ?> <?= get_option('woocommerce_weight_unit') ?></td>
+                        <td><?= $weightVariation['cost'] ?> <?= get_woocommerce_currency_symbol() ?></td>
                         <td>
                             <form action="" method="post" onsubmit="return confirm('<?= __('Delete this weight variation?', 'woocommerce-mondialrelay'); ?>');">
                                 <input name="_method" type="hidden" value="delete">
@@ -62,12 +62,17 @@
                     <label for="shipping_method"><?= __("Shipping method", 'woocommerce-weight-shipping') ?><span class="woocommerce-mondialrelay-required">*</span></label>
                 </th>
                 <td>
-
+                    <select name="shipping_method" id="shipping_method" required>
+                        <option value="" disabled selected><?= __("Select a shipping method", 'woocommerce-weight-shipping') ?></option>
+                        <?php foreach ($shippingMethods as $shippingMethod) : ?>
+                            <option value="<?= $shippingMethod->instanceId ?>">[<?= $shippingMethod->zone['name'] ?>] <?= $shippingMethod->settings['method_title'] ?></option>
+                        <?php endforeach ?>
+                    </select>
                 </td>
             </tr>
             <tr valign="top">
                 <th scope="row">
-                    <label for="weight"><?= __("Weight", 'woocommerce-weight-shipping') ?> (kg)<span class="woocommerce-mondialrelay-required">*</span></label>
+                    <label for="weight"><?= __("Weight", 'woocommerce-weight-shipping') ?> (<?= get_option('woocommerce_weight_unit') ?>)<span class="woocommerce-mondialrelay-required">*</span></label>
                 </th>
                 <td>
                     <input name="weight" id="weight" type="number" step="0.01" required>
@@ -75,7 +80,7 @@
             </tr>
             <tr valign="top">
                 <th scope="row">
-                    <label for="cost"><?= __("Cost", 'woocommerce-weight-shipping') ?> (€)<span class="woocommerce-mondialrelay-required">*</span></label>
+                    <label for="cost"><?= __("Cost", 'woocommerce-weight-shipping') ?> (<?= get_woocommerce_currency_symbol() ?>)<span class="woocommerce-mondialrelay-required">*</span></label>
                 </th>
                 <td>
                     <input name="cost" id="cost" type="number" step="0.01" required>

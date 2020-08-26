@@ -13,10 +13,12 @@
  * Domain Path: /resources/lang
  */
 
-use WoocommerceWeightShipping\Controllers\AdminController;
-use WoocommerceWeightShipping\Controllers\CheckoutController;
+use WoocommerceWeightShipping\Controllers\Admin\AdminController;
+use WoocommerceWeightShipping\Controllers\Checkout\CheckoutController;
 
-$plugin = require __DIR__ . '/bootstrap/plugin.php';
+require_once __DIR__ . '/vendor/autoload.php';
+
+new Icarus\Plugin();
 
 if (is_admin()) {
     new AdminController;

@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'view' => __DIR__ . '/../resources/views/',
+    'views' => __DIR__ . '/../resources/views/',
 ];

@@ -1,14 +1,20 @@
 <?php
 
-namespace WoocommerceWeightShipping\Controllers;
+namespace WoocommerceWeightShipping\Controllers\Admin;
 
 use WoocommerceWeightShipping\Services\ShippingMethodService;
-use Icarus\Support\Facades\View;
 use Icarus\Support\Facades\Notice;
-use Icarus\Support\Facades\Menu;
+use WoocommerceWeightShipping\Controllers\Admin\Traits\Helper;
+use WoocommerceWeightShipping\Controllers\Admin\Traits\Menus;
+use WoocommerceWeightShipping\Controllers\Admin\Traits\Router;
+use WoocommerceWeightShipping\Controllers\Controller;
 
-class AdminController
+class AdminController extends Controller
 {
+    use Helper;
+    use Menus;
+    use Router;
+
     /**
      * Plugin url page
      *
@@ -21,6 +27,7 @@ class AdminController
      */
     public function __construct()
     {
+        parent::__construct();
         $this->createMenu();
         $this->dispatch();
     }
@@ -33,7 +40,7 @@ class AdminController
     public function index()
     {
         $shippingMethods = (new ShippingMethodService)->all();
-        return View::render('index', compact('shippingMethods'));
+        return $this->view->render('index', compact('shippingMethods'));
     }
 
     /**
@@ -72,53 +79,5 @@ class AdminController
 
         Notice::create('success', 'Your weight variation shipping has been saved.');
         return $this->redirect($this->page);
-    }
-
-    /**
-     * Create the admin menu
-     *
-     * @return void
-     */
-    protected function createMenu(): void
-    {
-        Menu::addPage('Weight Shipping', 'Weight Shipping', 'manage_options', 'woocommerce-weight-shipping', function () {
-            return (new \WoocommerceWeightShipping\Controllers\AdminController)->index();
-        }, 'dashicons-store', 58.1);
-        Menu::create();
-    }
-
-    /**
-     * Dispatch
-     *
-     * @return void
-     */
-    public function dispatch()
-    {
-        if (isset($_GET['page']) and $_GET['page'] == $this->page) {
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                if (isset($_POST['_method']) and $_POST['_method'] == 'delete') {
-                    return $this->delete();
-                } else {
-                    return $this->add();
-                }
-            }
-        }
-    }
-
-    /**
-     * Redirect to a specific page or a specific tab
-     *
-     * @param string $page
-     * @param string $tab
-     * @return void
-     */
-    public function redirect($page, $tab = null)
-    {
-        $location = "?page={$page}";
-        if ($tab) {
-            $location .= "&tab={$tab}";
-        }
-        header("Location: $location");
-        die();
     }
 }

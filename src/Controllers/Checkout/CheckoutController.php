@@ -1,8 +1,6 @@
 <?php
 
-namespace WoocommerceWeightShipping\Controllers;
-
-use WoocommerceWeightShipping\Models\ShippingMethod;
+namespace WoocommerceWeightShipping\Controllers\Checkout;
 
 class CheckoutController
 {

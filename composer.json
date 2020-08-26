@@ -26,6 +26,9 @@
     "cba85/wp-icarus-framework": "dev-master"
   },
   "autoload": {
+    "files": [
+      "src/Helpers.php"
+    ],
     "psr-4": {
       "WoocommerceWeightShipping\\": "src/"
     }

@@ -1,8 +1,6 @@
 <?php
 
-use WoocommerceWeightShipping\Models\ShippingMethod;
-
-class ShippingMethodTest extends \PHPUnit\Framework\TestCase
+class HelperConvertWeightInGramsTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Convert a weight in g unit to g
@@ -13,7 +11,7 @@ class ShippingMethodTest extends \PHPUnit\Framework\TestCase
     {
         $weight = 1;
         $woocommerceWeightUnit = 'g';
-        $convertedWeight = (new ShippingMethod)->convertCurrentWeightUnitToGrams($weight, $woocommerceWeightUnit);
+        $convertedWeight = convertWeightUnitToGrams($weight, $woocommerceWeightUnit);
         $this->assertEquals(1, $convertedWeight);
     }
 
@@ -26,7 +24,7 @@ class ShippingMethodTest extends \PHPUnit\Framework\TestCase
     {
         $weight = 1;
         $woocommerceWeightUnit = 'kg';
-        $convertedWeight = (new ShippingMethod)->convertCurrentWeightUnitToGrams($weight, $woocommerceWeightUnit);
+        $convertedWeight = convertWeightUnitToGrams($weight, $woocommerceWeightUnit);
         $this->assertEquals(1000, $convertedWeight);
     }
 
@@ -39,7 +37,7 @@ class ShippingMethodTest extends \PHPUnit\Framework\TestCase
     {
         $weight = 1;
         $woocommerceWeightUnit = 'lbs';
-        $convertedWeight = (new ShippingMethod)->convertCurrentWeightUnitToGrams($weight, $woocommerceWeightUnit);
+        $convertedWeight = convertWeightUnitToGrams($weight, $woocommerceWeightUnit);
         $this->assertEquals(453.59237, $convertedWeight);
     }
 
@@ -52,7 +50,7 @@ class ShippingMethodTest extends \PHPUnit\Framework\TestCase
     {
         $weight = 1;
         $woocommerceWeightUnit = 'oz';
-        $convertedWeight = (new ShippingMethod)->convertCurrentWeightUnitToGrams($weight, $woocommerceWeightUnit);
+        $convertedWeight = convertWeightUnitToGrams($weight, $woocommerceWeightUnit);
         $this->assertEquals(28.3495, $convertedWeight);
     }
 }

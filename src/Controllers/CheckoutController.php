@@ -15,28 +15,6 @@ class CheckoutController
     }
 
     /**
-     * Get closest shipping method weight variation
-     *
-     * @param array $weightVariations
-     * @param int $cartWeightInGrams
-     * @return array
-     */
-    public function getClosestWeightVariation(array $weightVariations, int $cartWeightInGrams)
-    {
-        $closest = null;
-        $shippingMethodVariation = null;
-        foreach ($weightVariations as $weightVariation) {
-            if ($cartWeightInGrams >= $weightVariation['weight']) {
-                if (!$closest or abs($cartWeightInGrams - $closest) > abs($weightVariation['weight'] - $cartWeightInGrams)) {
-                    $closest = $weightVariation['weight'];
-                    $shippingMethodVariation = $weightVariation;
-                }
-            }
-        }
-        return $shippingMethodVariation;
-    }
-
-    /**
      * Convert weight in grams
      *
      * @param float $weight
@@ -45,7 +23,7 @@ class CheckoutController
     public function convertWeightInGrams($weight)
     {
         $unit = get_option('woocommerce_weight_unit');
-        $convertedWeight = (new ShippingMethod)->convertCurrentWeightUnitToGrams($weight, $unit);
+        $convertedWeight = convertWeightUnitToGrams($weight, $unit);
         return round($convertedWeight, 2);
     }
 
@@ -86,7 +64,7 @@ class CheckoutController
 
         $shippingMethodWeightVariations = [];
         foreach ($weightVariations as $id => $weightVariation) {
-            if (!$closestWeightVariation = $this->getClosestWeightVariation($weightVariation, $cartWeightInGrams)) {
+            if (!$closestWeightVariation = getClosestWeightVariation($weightVariation, $cartWeightInGrams)) {
                 return $rates;
             }
             $shippingMethodWeightVariations[$id] = $closestWeightVariation;

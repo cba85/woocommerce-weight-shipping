@@ -2,10 +2,9 @@
 
 namespace WoocommerceWeightShipping\Controllers;
 
-use Icarus\Assets\Style;
-use Icarus\Assets\Script;
 use Icarus\View\View;
 use Icarus\Config\Config;
+use Icarus\Support\Facades\Session;
 
 class Controller
 {
@@ -24,13 +23,6 @@ class Controller
     protected $view;
 
     /**
-     * Assets style instance
-     *
-     * @var \Icarus\Assets\Style
-     */
-    protected $style;
-
-    /**
      * Assets script instance
      *
      * @var \Icarus\Assets\Script
@@ -44,6 +36,8 @@ class Controller
     {
         $this->config = new Config;
         $this->config->bind(['plugin' => require __DIR__ . "/../../config/plugin.php"]);
+
+        Session::setKey($this->config->get('plugin')['slug']);
 
         $this->view = new View;
         $this->view->setPath($this->config->get('plugin')['views']);

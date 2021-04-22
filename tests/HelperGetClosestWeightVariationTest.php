@@ -36,7 +36,7 @@ class HelperGetClosestWeightVariationTest extends \PHPUnit\Framework\TestCase
         ];
 
         $closestWeightVariation = getClosestWeightVariation($weightVariations, 200);
-        $this->assertNull($closestWeightVariation['cost']);
+        $this->assertNull($closestWeightVariation);
 
         $closestWeightVariation = getClosestWeightVariation($weightVariations, 700);
         $this->assertEquals(5, $closestWeightVariation['cost']);

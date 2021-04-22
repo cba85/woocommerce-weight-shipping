@@ -1,0 +1,109 @@
+# Copyright (C) 2020 Clément Barbaza
+# This file is distributed under the same license as the WooCommerce Weight Shipping plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Weight Shipping 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-weight-shipping\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-04-22T11:55:47+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: woocommerce-weight-shipping\n"
+
+#. Plugin Name of the plugin
+msgid "WooCommerce Weight Shipping"
+msgstr "Livraison au poids pour WooCommerce"
+
+#. Plugin URI of the plugin
+msgid "https://github.com/cba85/woocommerce-weight-shipping"
+msgstr ""
+
+#. Description of the plugin
+msgid "WooCommerce weight shipping plugin"
+msgstr "Plugin de livraison selon le poids des colis pour WooCommerce"
+
+#. Author of the plugin
+msgid "Clément Barbaza"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://clementbarbaza.com/"
+msgstr ""
+
+#: resources/views/index.view.php:1
+msgid "Woocommerce Weight Shipping"
+msgstr ""
+
+#: resources/views/index.view.php:5
+msgid "Shipping methods"
+msgstr "Méthodes de livraison"
+
+#: resources/views/index.view.php:10
+msgid "ID"
+msgstr "ID"
+
+#: resources/views/index.view.php:11
+msgid "Title"
+msgstr "Titre"
+
+#: resources/views/index.view.php:12
+msgid "Zone"
+msgstr "Zone"
+
+#: resources/views/index.view.php:13
+msgid "Enabled"
+msgstr "Actif"
+
+#: resources/views/index.view.php:14
+msgid "Tax"
+msgstr "Taxe"
+
+#: resources/views/index.view.php:15
+msgid "Max. weight"
+msgstr "Poids max."
+
+#: resources/views/index.view.php:16
+#: resources/views/index.view.php:83
+msgid "Cost"
+msgstr "Coût"
+
+#: resources/views/index.view.php:17
+msgid "Actions"
+msgstr "Actions"
+
+#: resources/views/index.view.php:25
+#: resources/views/index.view.php:68
+msgid "Other"
+msgstr "Autres"
+
+#: resources/views/index.view.php:39
+msgid "Delete this weight variation?"
+msgstr "Supprimer cette variation de poids ?"
+
+#: resources/views/index.view.php:43
+msgid "Delete"
+msgstr "Supprimer"
+
+#: resources/views/index.view.php:55
+msgid "Create a weight variation"
+msgstr "Créer une variation de poids ?"
+
+#: resources/views/index.view.php:62
+msgid "Shipping method"
+msgstr "Méthode de livraison"
+
+#: resources/views/index.view.php:66
+msgid "Select a shipping method"
+msgstr "Sélectionnez une méthode de livraison"
+
+#: resources/views/index.view.php:75
+msgid "Weight"
+msgstr "Poids"
+
+#: resources/views/index.view.php:91
+msgid "Create variation"
+msgstr "Créer une variation"

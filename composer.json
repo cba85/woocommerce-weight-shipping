@@ -2,11 +2,11 @@
   "name": "cba85/woocommerce-weight-shipping",
   "description": "WooCommerce weight shipping plugin",
   "type": "wordpress-plugin",
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "authors": [
     {
       "name": "cba85",
-      "email": "hi@clementbarbaza.com"
+      "email": "clement@clementbarbaza.com"
     }
   ],
   "keywords": [
@@ -22,7 +22,7 @@
     }
   ],
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.4",
     "cba85/wp-icarus-framework": "dev-master"
   },
   "autoload": {

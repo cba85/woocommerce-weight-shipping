@@ -23,4 +23,5 @@ new Icarus\Plugin();
 if (is_admin()) {
     new AdminController;
 }
+
 new CheckoutController;

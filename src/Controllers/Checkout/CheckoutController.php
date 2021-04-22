@@ -62,10 +62,9 @@ class CheckoutController
 
         $shippingMethodWeightVariations = [];
         foreach ($weightVariations as $id => $weightVariation) {
-            if (!$closestWeightVariation = getClosestWeightVariation($weightVariation, $cartWeightInGrams)) {
-                return $rates;
+            if ($closestWeightVariation = getClosestWeightVariation($weightVariation, $cartWeightInGrams)) {
+                $shippingMethodWeightVariations[$id] = $closestWeightVariation;
             }
-            $shippingMethodWeightVariations[$id] = $closestWeightVariation;
         }
 
         foreach ($shippingMethodWeightVariations as $id => $shippingMethodWeightVariation) {

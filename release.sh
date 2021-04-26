@@ -10,6 +10,7 @@ cd "$name"
 composer install --no-dev
 rm -rf release.sh
 rm -rf composer.lock
+rm -rf .git
 
 cd ..
 

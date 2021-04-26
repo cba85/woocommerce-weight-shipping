@@ -15,3 +15,9 @@ This plugin is made using [WP Icarus framework](https://github.com/cba85/wp-icar
 ```
 ./vendor/bin/phpunit
 ```
+
+## Release
+
+```
+./release.sh
+```
